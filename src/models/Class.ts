@@ -2,8 +2,8 @@ import mongoose, { Schema, Document, Types } from "mongoose";
 
 export interface IClass extends Document {
   name: string;
-  teacher: Types.ObjectId;
-  students: Types.ObjectId[];
+  teacher?: Types.ObjectId;
+  students?: Types.ObjectId[];
 }
 
 const ClassSchema = new Schema<IClass>({
@@ -20,4 +20,4 @@ const ClassSchema = new Schema<IClass>({
 });
 
 
-export default mongoose.model<IClass>("Teacher",ClassSchema );
+export default mongoose.model<IClass>("Class",ClassSchema );

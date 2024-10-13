@@ -2,7 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import authRouter from "./routes/auth";
 
-import connectDB from "./config/db"; ;
+import connectDB from "./config/db";
+ 
 
 dotenv.config();
 
@@ -13,7 +14,6 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 // MongoDB Connection
-const MONGODB_URI = process.env.MONGODB_URI;
 
 connectDB();
 
@@ -24,5 +24,6 @@ app.use("/auth", authRouter);
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
 
 

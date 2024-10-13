@@ -11,15 +11,12 @@ export interface IUser extends Document {
   Grades?: number[];
   }
 
-const UserSchema = new Schema< IUser>({
+const UserSchema = new Schema<IUser>({
   name: {
     type: String,
-    required: [true, "name is required"],
+    required: true,
     unique: true,
-    minlength: [3, "name must be at least 3 characters long"],
-    maxlength: [30, "name cannot exceed 30 characters"],
-    match: [/^[a-zA-Z0-9_]+$/, "Username can only contain letters, numbers, and underscores"],
-  },
+  },  
   email: {
     type: String,
     required: [true, "Email is required"],
@@ -31,18 +28,18 @@ const UserSchema = new Schema< IUser>({
       message: "Please provide a valid email address",
     },
   },
-  role: {
-    type: String,
-    required: [true, "Role is required"], 
-    enum: ["student", "teacher"], default : "student",
-  },
   password: {
     type: String,
     required: [true, "Password is required"],
     select: false,
   },
+  role: {
+    type: String,
+    required: [true, "Role is required"], 
+    enum: ["student", "teacher"], default : "student",
+  },
   class: { type: Schema.Types.ObjectId, ref: "Class" },
-  className: { type: String },
+  className: { type: String,  required: true },
   Grades: [Number]
 });
 
