@@ -1,11 +1,12 @@
 import mongoose, { Schema, Document, Types } from "mongoose";
+import Class from "./Class";
 import validator from "validator";
 
 export interface ITeacher extends Document {
   name: string;
   email: string;
   password: string;
-  class: Types.ObjectId;
+  class: string 
 }
 
 const TeacherSchema = new Schema<ITeacher>({
@@ -34,7 +35,14 @@ const TeacherSchema = new Schema<ITeacher>({
     required: [true, "Password is required"],
     select: false,
   },
-  class: { type: Schema.Types.ObjectId, ref: "Class" },
-});
+  class:{
+    type: String,
+    required: [true, "className is required"],
+    unique: true,
+    match: [/^[a-zA-Z0-9_]+$/, "Username can only contain letters, numbers, and underscores"],
+  },
+  
+}
+);
 
 export default mongoose.model<ITeacher>("Teacher",TeacherSchema );
