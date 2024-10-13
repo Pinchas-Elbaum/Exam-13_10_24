@@ -1,15 +1,17 @@
 import mongoose, { Schema, Document, Types } from "mongoose";
-import Class from "./Class";
 import validator from "validator";
 
-export interface ITeacher extends Document {
+export interface IUser extends Document {
   name: string;
   email: string;
   password: string;
-  class: string 
-}
+  role: "student" | "teacher";
+  class: Types.ObjectId;
+  className: string;
+  Grades?: number[];
+  }
 
-const TeacherSchema = new Schema<ITeacher>({
+const UserSchema = new Schema< IUser>({
   name: {
     type: String,
     required: [true, "name is required"],
@@ -29,20 +31,19 @@ const TeacherSchema = new Schema<ITeacher>({
       message: "Please provide a valid email address",
     },
   },
-  
+  role: {
+    type: String,
+    required: [true, "Role is required"], 
+    enum: ["student", "teacher"], default : "student",
+  },
   password: {
     type: String,
     required: [true, "Password is required"],
     select: false,
   },
-  class:{
-    type: String,
-    required: [true, "className is required"],
-    unique: true,
-    match: [/^[a-zA-Z0-9_]+$/, "Username can only contain letters, numbers, and underscores"],
-  },
-  
-}
-);
+  class: { type: Schema.Types.ObjectId, ref: "Class" },
+  className: { type: String },
+  Grades: [Number]
+});
 
-export default mongoose.model<ITeacher>("Teacher",TeacherSchema );
+export default mongoose.model<IUser>("User", UserSchema);

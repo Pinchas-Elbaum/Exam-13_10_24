@@ -14,11 +14,9 @@ const ClassSchema = new Schema<IClass>({
     minlength: [3, "name must be at least 3 characters long"],
     maxlength: [30, "name cannot exceed 30 characters"],
     match: [/^[a-zA-Z0-9_]+$/, "Username can only contain letters, numbers, and underscores"],
-  },
-  
-  
-  teacher: { type: Schema.Types.ObjectId, ref: "Teacher" },
-  students: [{ type: Schema.Types.ObjectId, ref: "Student" }],
+  },  
+  teacher: { type: Schema.Types.ObjectId, ref: "User" },
+  students: [{ type: Schema.Types.ObjectId, ref: "User" }],
 });
 
 

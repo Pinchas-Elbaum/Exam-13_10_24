@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import authRouter from "./routes/authRouters/*";
+import authRouter from "./routes/auth";
 
 import connectDB from "./config/db"; ;
 
@@ -22,8 +22,6 @@ app.use("/auth", authRouter);
 
 
 
-// Error handling middleware
-app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
