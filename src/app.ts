@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import authRouter from "./routes/authRouters/*";
 
 import connectDB from "./config/db"; ;
 
@@ -17,7 +18,7 @@ const MONGODB_URI = process.env.MONGODB_URI;
 connectDB();
 
 // Routes
-app.use("/api/posts", authRouter);
+app.use("/auth", authRouter);
 
 
 
